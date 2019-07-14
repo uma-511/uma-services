@@ -1,12 +1,17 @@
 package com.lgmn.umaservices.basic.entity;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
 @Table(name = "customer", schema = "uma", catalog = "")
-public class CustomerEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class CustomerEntity implements Serializable {
     private int id;
     private String name;
     private String phone;
@@ -15,9 +20,11 @@ public class CustomerEntity {
     private String remark;
     private String createUser;
     private Timestamp createTime;
+    private int delFlag;
+    private String customerCode;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -27,7 +34,7 @@ public class CustomerEntity {
     }
 
     @Basic
-    @Column(name = "name", nullable = false, length = 100)
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -37,7 +44,7 @@ public class CustomerEntity {
     }
 
     @Basic
-    @Column(name = "phone", nullable = true, length = 11)
+    @Column(name = "phone")
     public String getPhone() {
         return phone;
     }
@@ -47,7 +54,7 @@ public class CustomerEntity {
     }
 
     @Basic
-    @Column(name = "fax", nullable = true, length = 20)
+    @Column(name = "fax")
     public String getFax() {
         return fax;
     }
@@ -57,7 +64,7 @@ public class CustomerEntity {
     }
 
     @Basic
-    @Column(name = "address", nullable = true, length = 200)
+    @Column(name = "address")
     public String getAddress() {
         return address;
     }
@@ -67,7 +74,7 @@ public class CustomerEntity {
     }
 
     @Basic
-    @Column(name = "remark", nullable = true, length = 500)
+    @Column(name = "remark")
     public String getRemark() {
         return remark;
     }
@@ -77,7 +84,7 @@ public class CustomerEntity {
     }
 
     @Basic
-    @Column(name = "create_user", nullable = true, length = 20)
+    @Column(name = "create_user")
     public String getCreateUser() {
         return createUser;
     }
@@ -87,7 +94,8 @@ public class CustomerEntity {
     }
 
     @Basic
-    @Column(name = "create_time", nullable = true)
+    @Column(name = "create_time")
+    @CreatedDate
     public Timestamp getCreateTime() {
         return createTime;
     }
@@ -96,23 +104,45 @@ public class CustomerEntity {
         this.createTime = createTime;
     }
 
+    @Basic
+    @Column(name = "del_flag")
+    public int getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(int delFlag) {
+        this.delFlag = delFlag;
+    }
+
+    @Basic
+    @Column(name = "customer_code")
+    public String getCustomerCode() {
+        return customerCode;
+    }
+
+    public void setCustomerCode(String customerCode) {
+        this.customerCode = customerCode;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CustomerEntity that = (CustomerEntity) o;
         return id == that.id &&
+                delFlag == that.delFlag &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(phone, that.phone) &&
                 Objects.equals(fax, that.fax) &&
                 Objects.equals(address, that.address) &&
                 Objects.equals(remark, that.remark) &&
                 Objects.equals(createUser, that.createUser) &&
-                Objects.equals(createTime, that.createTime);
+                Objects.equals(createTime, that.createTime) &&
+                Objects.equals(customerCode, that.customerCode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, phone, fax, address, remark, createUser, createTime);
+        return Objects.hash(id, name, phone, fax, address, remark, createUser, createTime, delFlag, customerCode);
     }
 }

@@ -1,12 +1,17 @@
 package com.lgmn.umaservices.basic.entity;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
 @Table(name = "delivery_note", schema = "uma", catalog = "")
-public class DeliveryNoteEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class DeliveryNoteEntity implements Serializable {
     private int id;
     private String customer;
     private String contact;
@@ -20,9 +25,10 @@ public class DeliveryNoteEntity {
     private String remark;
     private String store;
     private String revicer;
+    private int delFlag;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -32,7 +38,7 @@ public class DeliveryNoteEntity {
     }
 
     @Basic
-    @Column(name = "customer", nullable = true, length = 100)
+    @Column(name = "customer")
     public String getCustomer() {
         return customer;
     }
@@ -42,7 +48,7 @@ public class DeliveryNoteEntity {
     }
 
     @Basic
-    @Column(name = "contact", nullable = true, length = 20)
+    @Column(name = "contact")
     public String getContact() {
         return contact;
     }
@@ -52,7 +58,7 @@ public class DeliveryNoteEntity {
     }
 
     @Basic
-    @Column(name = "address", nullable = false, length = 200)
+    @Column(name = "address")
     public String getAddress() {
         return address;
     }
@@ -62,7 +68,7 @@ public class DeliveryNoteEntity {
     }
 
     @Basic
-    @Column(name = "phone", nullable = false, length = 20)
+    @Column(name = "phone")
     public String getPhone() {
         return phone;
     }
@@ -72,7 +78,7 @@ public class DeliveryNoteEntity {
     }
 
     @Basic
-    @Column(name = "delivery_num", nullable = false, length = 32)
+    @Column(name = "delivery_num")
     public String getDeliveryNum() {
         return deliveryNum;
     }
@@ -82,7 +88,7 @@ public class DeliveryNoteEntity {
     }
 
     @Basic
-    @Column(name = "driver", nullable = false, length = 20)
+    @Column(name = "driver")
     public String getDriver() {
         return driver;
     }
@@ -92,7 +98,7 @@ public class DeliveryNoteEntity {
     }
 
     @Basic
-    @Column(name = "car_num", nullable = false, length = 20)
+    @Column(name = "car_num")
     public String getCarNum() {
         return carNum;
     }
@@ -102,7 +108,8 @@ public class DeliveryNoteEntity {
     }
 
     @Basic
-    @Column(name = "create_time", nullable = false)
+    @Column(name = "create_time")
+    @CreatedDate
     public Timestamp getCreateTime() {
         return createTime;
     }
@@ -112,7 +119,7 @@ public class DeliveryNoteEntity {
     }
 
     @Basic
-    @Column(name = "create_user", nullable = false, length = 20)
+    @Column(name = "create_user")
     public String getCreateUser() {
         return createUser;
     }
@@ -122,7 +129,7 @@ public class DeliveryNoteEntity {
     }
 
     @Basic
-    @Column(name = "remark", nullable = true, length = 500)
+    @Column(name = "remark")
     public String getRemark() {
         return remark;
     }
@@ -132,7 +139,7 @@ public class DeliveryNoteEntity {
     }
 
     @Basic
-    @Column(name = "store", nullable = true, length = 20)
+    @Column(name = "store")
     public String getStore() {
         return store;
     }
@@ -142,7 +149,7 @@ public class DeliveryNoteEntity {
     }
 
     @Basic
-    @Column(name = "revicer", nullable = true, length = 20)
+    @Column(name = "revicer")
     public String getRevicer() {
         return revicer;
     }
@@ -151,12 +158,23 @@ public class DeliveryNoteEntity {
         this.revicer = revicer;
     }
 
+    @Basic
+    @Column(name = "del_flag")
+    public int getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(int delFlag) {
+        this.delFlag = delFlag;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DeliveryNoteEntity that = (DeliveryNoteEntity) o;
         return id == that.id &&
+                delFlag == that.delFlag &&
                 Objects.equals(customer, that.customer) &&
                 Objects.equals(contact, that.contact) &&
                 Objects.equals(address, that.address) &&
@@ -173,6 +191,6 @@ public class DeliveryNoteEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, customer, contact, address, phone, deliveryNum, driver, carNum, createTime, createUser, remark, store, revicer);
+        return Objects.hash(id, customer, contact, address, phone, deliveryNum, driver, carNum, createTime, createUser, remark, store, revicer, delFlag);
     }
 }

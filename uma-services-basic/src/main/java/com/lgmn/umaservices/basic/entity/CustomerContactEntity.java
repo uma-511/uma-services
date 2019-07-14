@@ -1,12 +1,17 @@
 package com.lgmn.umaservices.basic.entity;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
 @Table(name = "customer_contact", schema = "uma", catalog = "")
-public class CustomerContactEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class CustomerContactEntity implements Serializable {
     private int id;
     private int customerId;
     private String name;
@@ -15,9 +20,10 @@ public class CustomerContactEntity {
     private String remark;
     private String createUser;
     private Timestamp createTime;
+    private int delFlag;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -27,7 +33,7 @@ public class CustomerContactEntity {
     }
 
     @Basic
-    @Column(name = "customer_id", nullable = false)
+    @Column(name = "customer_id")
     public int getCustomerId() {
         return customerId;
     }
@@ -37,7 +43,7 @@ public class CustomerContactEntity {
     }
 
     @Basic
-    @Column(name = "name", nullable = true, length = 20)
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -47,7 +53,7 @@ public class CustomerContactEntity {
     }
 
     @Basic
-    @Column(name = "phone", nullable = true, length = 20)
+    @Column(name = "phone")
     public String getPhone() {
         return phone;
     }
@@ -57,7 +63,7 @@ public class CustomerContactEntity {
     }
 
     @Basic
-    @Column(name = "position", nullable = true, length = 50)
+    @Column(name = "position")
     public String getPosition() {
         return position;
     }
@@ -67,7 +73,7 @@ public class CustomerContactEntity {
     }
 
     @Basic
-    @Column(name = "remark", nullable = true, length = 500)
+    @Column(name = "remark")
     public String getRemark() {
         return remark;
     }
@@ -77,7 +83,7 @@ public class CustomerContactEntity {
     }
 
     @Basic
-    @Column(name = "create_user", nullable = true, length = 20)
+    @Column(name = "create_user")
     public String getCreateUser() {
         return createUser;
     }
@@ -87,13 +93,24 @@ public class CustomerContactEntity {
     }
 
     @Basic
-    @Column(name = "create_time", nullable = true)
+    @Column(name = "create_time")
+    @CreatedDate
     public Timestamp getCreateTime() {
         return createTime;
     }
 
     public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
+    }
+
+    @Basic
+    @Column(name = "del_flag")
+    public int getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(int delFlag) {
+        this.delFlag = delFlag;
     }
 
     @Override
@@ -103,6 +120,7 @@ public class CustomerContactEntity {
         CustomerContactEntity that = (CustomerContactEntity) o;
         return id == that.id &&
                 customerId == that.customerId &&
+                delFlag == that.delFlag &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(phone, that.phone) &&
                 Objects.equals(position, that.position) &&
@@ -113,6 +131,6 @@ public class CustomerContactEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, customerId, name, phone, position, remark, createUser, createTime);
+        return Objects.hash(id, customerId, name, phone, position, remark, createUser, createTime, delFlag);
     }
 }

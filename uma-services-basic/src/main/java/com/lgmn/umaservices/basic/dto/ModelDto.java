@@ -2,6 +2,7 @@ package com.lgmn.umaservices.basic.dto;
 
 import com.lgmn.common.annotation.Condition;
 import com.lgmn.common.domain.LgmnDto;
+import com.lgmn.common.enums.ConditionExcept;
 import lombok.Data;
 
 @Data
@@ -11,8 +12,8 @@ public class ModelDto extends LgmnDto {
         //产品id（当启用产品分类时必填）
     	@Condition
     private Integer pid;
-        //产品名称
-    	@Condition
+    //产品名称
+    @Condition(except = ConditionExcept.CONTAIN)
     private String name;
         //长度
     	@Condition
@@ -44,5 +45,7 @@ public class ModelDto extends LgmnDto {
         //备注
     	@Condition
     private String remark;
+    @Condition
+    private Integer delFlag;
 
 }

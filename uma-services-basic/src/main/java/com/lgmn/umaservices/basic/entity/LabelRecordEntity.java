@@ -1,13 +1,14 @@
 package com.lgmn.umaservices.basic.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
 @Table(name = "label_record", schema = "uma", catalog = "")
-public class LabelRecordEntity {
+public class LabelRecordEntity implements Serializable {
     private int id;
     private String labelNum;
     private Integer packId;
@@ -28,9 +29,10 @@ public class LabelRecordEntity {
     private String outUser;
     private String invalidUser;
     private Byte recordType;
+    private int quantity;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -40,7 +42,7 @@ public class LabelRecordEntity {
     }
 
     @Basic
-    @Column(name = "label_num", nullable = true, length = 18)
+    @Column(name = "label_num")
     public String getLabelNum() {
         return labelNum;
     }
@@ -50,7 +52,7 @@ public class LabelRecordEntity {
     }
 
     @Basic
-    @Column(name = "pack_id", nullable = true)
+    @Column(name = "pack_id")
     public Integer getPackId() {
         return packId;
     }
@@ -60,7 +62,7 @@ public class LabelRecordEntity {
     }
 
     @Basic
-    @Column(name = "order_id", nullable = false)
+    @Column(name = "order_id")
     public int getOrderId() {
         return orderId;
     }
@@ -70,7 +72,7 @@ public class LabelRecordEntity {
     }
 
     @Basic
-    @Column(name = "prod_id", nullable = true)
+    @Column(name = "prod_id")
     public Integer getProdId() {
         return prodId;
     }
@@ -80,7 +82,7 @@ public class LabelRecordEntity {
     }
 
     @Basic
-    @Column(name = "model_id", nullable = true)
+    @Column(name = "model_id")
     public Integer getModelId() {
         return modelId;
     }
@@ -90,7 +92,7 @@ public class LabelRecordEntity {
     }
 
     @Basic
-    @Column(name = "status", nullable = true)
+    @Column(name = "status")
     public Integer getStatus() {
         return status;
     }
@@ -100,7 +102,7 @@ public class LabelRecordEntity {
     }
 
     @Basic
-    @Column(name = "prod_time", nullable = true)
+    @Column(name = "prod_time")
     public Timestamp getProdTime() {
         return prodTime;
     }
@@ -110,7 +112,7 @@ public class LabelRecordEntity {
     }
 
     @Basic
-    @Column(name = "in_time", nullable = true)
+    @Column(name = "in_time")
     public Timestamp getInTime() {
         return inTime;
     }
@@ -120,7 +122,7 @@ public class LabelRecordEntity {
     }
 
     @Basic
-    @Column(name = "out_time", nullable = true)
+    @Column(name = "out_time")
     public Timestamp getOutTime() {
         return outTime;
     }
@@ -130,7 +132,7 @@ public class LabelRecordEntity {
     }
 
     @Basic
-    @Column(name = "invalid_time", nullable = true)
+    @Column(name = "invalid_time")
     public Timestamp getInvalidTime() {
         return invalidTime;
     }
@@ -140,7 +142,7 @@ public class LabelRecordEntity {
     }
 
     @Basic
-    @Column(name = "label_type", nullable = true)
+    @Column(name = "label_type")
     public Integer getLabelType() {
         return labelType;
     }
@@ -150,7 +152,7 @@ public class LabelRecordEntity {
     }
 
     @Basic
-    @Column(name = "net_weight", nullable = true, precision = 2)
+    @Column(name = "net_weight")
     public BigDecimal getNetWeight() {
         return netWeight;
     }
@@ -160,7 +162,7 @@ public class LabelRecordEntity {
     }
 
     @Basic
-    @Column(name = "gross_weight", nullable = true, precision = 2)
+    @Column(name = "gross_weight")
     public BigDecimal getGrossWeight() {
         return grossWeight;
     }
@@ -170,7 +172,7 @@ public class LabelRecordEntity {
     }
 
     @Basic
-    @Column(name = "skin_weight", nullable = true, precision = 2)
+    @Column(name = "skin_weight")
     public BigDecimal getSkinWeight() {
         return skinWeight;
     }
@@ -180,7 +182,7 @@ public class LabelRecordEntity {
     }
 
     @Basic
-    @Column(name = "prod_user", nullable = true, length = 32)
+    @Column(name = "prod_user")
     public String getProdUser() {
         return prodUser;
     }
@@ -190,7 +192,7 @@ public class LabelRecordEntity {
     }
 
     @Basic
-    @Column(name = "in_user", nullable = true, length = 32)
+    @Column(name = "in_user")
     public String getInUser() {
         return inUser;
     }
@@ -200,7 +202,7 @@ public class LabelRecordEntity {
     }
 
     @Basic
-    @Column(name = "out_user", nullable = true, length = 32)
+    @Column(name = "out_user")
     public String getOutUser() {
         return outUser;
     }
@@ -210,7 +212,7 @@ public class LabelRecordEntity {
     }
 
     @Basic
-    @Column(name = "invalid_user", nullable = true, length = 32)
+    @Column(name = "invalid_user")
     public String getInvalidUser() {
         return invalidUser;
     }
@@ -220,13 +222,23 @@ public class LabelRecordEntity {
     }
 
     @Basic
-    @Column(name = "record_type", nullable = true)
+    @Column(name = "record_type")
     public Byte getRecordType() {
         return recordType;
     }
 
     public void setRecordType(Byte recordType) {
         this.recordType = recordType;
+    }
+
+    @Basic
+    @Column(name = "quantity")
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     @Override
@@ -236,6 +248,7 @@ public class LabelRecordEntity {
         LabelRecordEntity that = (LabelRecordEntity) o;
         return id == that.id &&
                 orderId == that.orderId &&
+                quantity == that.quantity &&
                 Objects.equals(labelNum, that.labelNum) &&
                 Objects.equals(packId, that.packId) &&
                 Objects.equals(prodId, that.prodId) &&
@@ -258,6 +271,6 @@ public class LabelRecordEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, labelNum, packId, orderId, prodId, modelId, status, prodTime, inTime, outTime, invalidTime, labelType, netWeight, grossWeight, skinWeight, prodUser, inUser, outUser, invalidUser, recordType);
+        return Objects.hash(id, labelNum, packId, orderId, prodId, modelId, status, prodTime, inTime, outTime, invalidTime, labelType, netWeight, grossWeight, skinWeight, prodUser, inUser, outUser, invalidUser, recordType, quantity);
     }
 }

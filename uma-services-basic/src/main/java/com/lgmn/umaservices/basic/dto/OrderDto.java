@@ -3,13 +3,14 @@ package com.lgmn.umaservices.basic.dto;
 import java.util.Date;
 import com.lgmn.common.annotation.Condition;
 import com.lgmn.common.domain.LgmnDto;
+import com.lgmn.common.enums.ConditionExcept;
 import lombok.Data;
 
 @Data
 public class OrderDto extends LgmnDto {
     	@Condition
     private Integer id;
-    	@Condition
+    @Condition(except = ConditionExcept.CONTAIN)
     private String orderNo;
         //产品id
     	@Condition
@@ -43,16 +44,16 @@ public class OrderDto extends LgmnDto {
     private Integer quantity;
         //保留int1
     	@Condition
-    private Integer int1;
+    private Integer int01;
         //保留int2
     	@Condition
-    private Integer int2;
+    private Integer int02;
         //保留int3
     	@Condition
-    private Integer int3;
+    private Integer int03;
         //保留int4
     	@Condition
-    private Integer int4;
+    private Integer int04;
         //保留int5
     	@Condition
     private Integer int5;
@@ -131,5 +132,7 @@ public class OrderDto extends LgmnDto {
         //保留decimal(11,3)4
     	@Condition
     private Double decimal1134;
+    @Condition
+    private Integer delFlag;
 
 }

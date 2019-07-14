@@ -1,11 +1,10 @@
 package com.lgmn.umaservices.provider.service;
 
-import java.util.Date;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.lgmn.umaservices.basic.dto.OrderDto;
-import com.lgmn.umaservices.basic.entity.OrderEntity;
-import com.lgmn.umaservices.basic.repository.OrderRepository;
-import com.lgmn.umaservices.basic.service.OrderService;
+import com.lgmn.umaservices.basic.entity.UOrderEntity;
+import com.lgmn.umaservices.basic.repository.UOrderRepository;
+import com.lgmn.umaservices.basic.service.UOrderService;
 import com.lgmn.common.service.LgmnAbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,12 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
         protocol = "${dubbo.protocol.id}",
         registry = "${dubbo.registry.id}"
 )
-public class OrderServiceImpl extends LgmnAbstractService<OrderEntity, OrderDto, Integer, OrderRepository> implements OrderService {
+public class UOrderServiceImpl extends LgmnAbstractService<UOrderEntity, OrderDto, Integer, UOrderRepository> implements UOrderService {
 
     @Autowired
-    private OrderRepository orderRepository;
+    private UOrderRepository orderRepository;
 
-    public OrderServiceImpl(OrderRepository repository) {
+    public UOrderServiceImpl(UOrderRepository repository) {
         super(repository);
     }
 }

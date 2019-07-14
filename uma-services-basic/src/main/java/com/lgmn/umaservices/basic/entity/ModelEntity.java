@@ -1,12 +1,13 @@
 package com.lgmn.umaservices.basic.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
 @Table(name = "model", schema = "uma", catalog = "")
-public class ModelEntity {
+public class ModelEntity implements Serializable {
     private int id;
     private Integer pid;
     private String name;
@@ -20,9 +21,10 @@ public class ModelEntity {
     private String weightUnit;
     private String color;
     private String remark;
+    private int delFlag;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -32,7 +34,7 @@ public class ModelEntity {
     }
 
     @Basic
-    @Column(name = "pid", nullable = true)
+    @Column(name = "pid")
     public Integer getPid() {
         return pid;
     }
@@ -42,7 +44,7 @@ public class ModelEntity {
     }
 
     @Basic
-    @Column(name = "name", nullable = false, length = 60)
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -52,7 +54,7 @@ public class ModelEntity {
     }
 
     @Basic
-    @Column(name = "longs", nullable = true, precision = 2)
+    @Column(name = "longs")
     public BigDecimal getLongs() {
         return longs;
     }
@@ -62,7 +64,7 @@ public class ModelEntity {
     }
 
     @Basic
-    @Column(name = "width", nullable = true, precision = 2)
+    @Column(name = "width")
     public BigDecimal getWidth() {
         return width;
     }
@@ -72,7 +74,7 @@ public class ModelEntity {
     }
 
     @Basic
-    @Column(name = "height", nullable = true, precision = 2)
+    @Column(name = "height")
     public BigDecimal getHeight() {
         return height;
     }
@@ -82,7 +84,7 @@ public class ModelEntity {
     }
 
     @Basic
-    @Column(name = "weight", nullable = true, precision = 2)
+    @Column(name = "weight")
     public BigDecimal getWeight() {
         return weight;
     }
@@ -92,7 +94,7 @@ public class ModelEntity {
     }
 
     @Basic
-    @Column(name = "long_unit", nullable = true, length = 10)
+    @Column(name = "long_unit")
     public String getLongUnit() {
         return longUnit;
     }
@@ -102,7 +104,7 @@ public class ModelEntity {
     }
 
     @Basic
-    @Column(name = "width_unit", nullable = true, length = 10)
+    @Column(name = "width_unit")
     public String getWidthUnit() {
         return widthUnit;
     }
@@ -112,7 +114,7 @@ public class ModelEntity {
     }
 
     @Basic
-    @Column(name = "height_unit", nullable = true, length = 10)
+    @Column(name = "height_unit")
     public String getHeightUnit() {
         return heightUnit;
     }
@@ -122,7 +124,7 @@ public class ModelEntity {
     }
 
     @Basic
-    @Column(name = "weight_unit", nullable = true, length = 10)
+    @Column(name = "weight_unit")
     public String getWeightUnit() {
         return weightUnit;
     }
@@ -132,7 +134,7 @@ public class ModelEntity {
     }
 
     @Basic
-    @Column(name = "color", nullable = true, length = 10)
+    @Column(name = "color")
     public String getColor() {
         return color;
     }
@@ -142,7 +144,7 @@ public class ModelEntity {
     }
 
     @Basic
-    @Column(name = "remark", nullable = true, length = 500)
+    @Column(name = "remark")
     public String getRemark() {
         return remark;
     }
@@ -151,12 +153,23 @@ public class ModelEntity {
         this.remark = remark;
     }
 
+    @Basic
+    @Column(name = "del_flag")
+    public int getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(int delFlag) {
+        this.delFlag = delFlag;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ModelEntity that = (ModelEntity) o;
         return id == that.id &&
+                delFlag == that.delFlag &&
                 Objects.equals(pid, that.pid) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(longs, that.longs) &&
@@ -173,6 +186,6 @@ public class ModelEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, pid, name, longs, width, height, weight, longUnit, widthUnit, heightUnit, weightUnit, color, remark);
+        return Objects.hash(id, pid, name, longs, width, height, weight, longUnit, widthUnit, heightUnit, weightUnit, color, remark, delFlag);
     }
 }
