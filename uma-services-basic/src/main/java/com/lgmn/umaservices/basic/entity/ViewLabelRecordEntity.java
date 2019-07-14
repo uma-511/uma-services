@@ -1,13 +1,14 @@
 package com.lgmn.umaservices.basic.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
 @Table(name = "view_label_record", schema = "uma", catalog = "")
-public class ViewLabelRecordEntity {
+public class ViewLabelRecordEntity implements Serializable {
     private int id;
     private String labelNum;
     private Integer packId;

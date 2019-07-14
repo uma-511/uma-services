@@ -3,6 +3,7 @@ package com.lgmn.umaservices.basic.dto;
 import java.util.Date;
 import com.lgmn.common.annotation.Condition;
 import com.lgmn.common.domain.LgmnDto;
+import com.lgmn.common.enums.ConditionExcept;
 import lombok.Data;
 
 @Data
@@ -10,7 +11,7 @@ public class ViewLabelRecordDto extends LgmnDto {
     	@Condition
     private Integer id;
         //存货编码
-    	@Condition
+    @Condition(except = ConditionExcept.CONTAIN)
     private String labelNum;
         //包号
     	@Condition
@@ -65,7 +66,7 @@ public class ViewLabelRecordDto extends LgmnDto {
     private String invalidUser;
         //记录类型 0：生成 1：导入
     	@Condition
-    private byte recordType;
+    private Byte recordType;
         //数量
     	@Condition
     private Integer quantity;
