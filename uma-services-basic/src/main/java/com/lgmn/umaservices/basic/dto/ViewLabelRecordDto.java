@@ -1,6 +1,12 @@
 package com.lgmn.umaservices.basic.dto;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
 import com.lgmn.common.annotation.Condition;
 import com.lgmn.common.domain.LgmnDto;
 import com.lgmn.common.enums.ConditionExcept;
@@ -8,126 +14,115 @@ import lombok.Data;
 
 @Data
 public class ViewLabelRecordDto extends LgmnDto {
-    	@Condition
+    @Condition
     private Integer id;
-        //存货编码
     @Condition(except = ConditionExcept.CONTAIN)
     private String labelNum;
-        //包号
-    	@Condition
+    @Condition
     private Integer packId;
-        //订单号
-    	@Condition
+    @Condition
     private Integer orderId;
-        //产品id
-    	@Condition
+    @Condition
     private Integer prodId;
-        //型号id
-    	@Condition
+    @Condition
     private Integer modelId;
-        //存储状态
-    	@Condition
+    @Condition
     private Integer status;
-        //生产日期
-    	@Condition
-    private Date prodTime;
-        //入库日期
-    	@Condition
-    private Date inTime;
-        //出库日期
-    	@Condition
-    private Date outTime;
-        //作废日期
-    	@Condition
-    private Date invalidTime;
-        //标签类型：0：产品标签 1：打包标签
-    	@Condition
+
+    private List<String> dateRange;
+
+//    public void setDateRange(List<String> dateRange){
+//        this.dateRange=dateRange;
+//            if(this.dateRange.size()>1){
+//                SimpleDateFormat sdf=new SimpleDateFormat("yyyy-NN-dd");
+//
+//                try {
+//
+//                    setBeforeProdTime(new Timestamp(sdf.parse(this.dateRange.get(0)).getTime()));
+//                    setEndProdTime( new Timestamp(sdf.parse(this.dateRange.get(1)).getTime()));
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//        }
+//    }
+
+    @Condition(except = ConditionExcept.BETWEEN_AND ,field = "prod_time",isMin = true)
+    private Timestamp beforeProdTime;
+    @Condition(except = ConditionExcept.BETWEEN_AND ,field = "prod_time",isMax = true)
+    private Timestamp endProdTime;
+    @Condition
+    private Timestamp inTime;
+    @Condition
+    private Timestamp outTime;
+    @Condition
+    private Timestamp invalidTime;
+    @Condition
     private Integer labelType;
-        //净重
-    	@Condition
-    private Double netWeight;
-        //毛重
-    	@Condition
-    private Double grossWeight;
-        //皮重
-    	@Condition
-    private Double skinWeight;
-        //生产人id
-    	@Condition
+    @Condition
+    private BigDecimal netWeight;
+    @Condition
+    private BigDecimal grossWeight;
+    @Condition
+    private BigDecimal skinWeight;
+    @Condition
     private String prodUser;
-        //入库人id
-    	@Condition
+    @Condition
     private String inUser;
-        //出库人id
-    	@Condition
+    @Condition
     private String outUser;
-        //作废人id
-    	@Condition
+    @Condition
     private String invalidUser;
-        //记录类型 0：生成 1：导入
-    	@Condition
+    @Condition
     private Byte recordType;
-        //数量
-    	@Condition
+    @Condition
     private Integer quantity;
-    	@Condition
+    @Condition
+    private String machineNum;
+    @Condition
+    private String banci;
+    @Condition(except = ConditionExcept.CONTAIN)
     private String orderNo;
-        //客户id
-    	@Condition
-    private Integer clientId;
-        //工艺要求
-    	@Condition
+    @Condition
+     private Integer clientId;
+    @Condition
     private String requirement;
-        //交货时间
-    	@Condition
-    private Date deliveryDate;
-        //数量
-    	@Condition
+    @Condition
+    private Timestamp deliveryDate;
+    @Condition
     private Integer orderQuantity;
-        //楼层
-    	@Condition
+    @Condition
     private Integer floor;
-        //每包数量
-    	@Condition
+    @Condition
     private Integer perPackQuantity;
-        //产品名称
-    	@Condition
+    @Condition
     private String productName;
-        //产品名称
-    	@Condition
+    @Condition
     private String modelName;
-        //米数
-    	@Condition
-    private Double longs;
-        //斤数
-    	@Condition
-    private Double weight;
-        //材质
-    	@Condition
+    @Condition
+    private BigDecimal longs;
+    @Condition
+    private BigDecimal weight;
+    @Condition
+    private BigDecimal width;
+    @Condition
     private String materialQuality;
-        //纹路
-    	@Condition
+    @Condition
     private String lines;
-        //规格
-    	@Condition
+    @Condition
     private String specs;
-        //码数
-    	@Condition
+    @Condition
     private String yard;
-        //颜色
-    	@Condition
+    @Condition
     private String color;
-        //登录账号
-    	@Condition
+    @Condition
     private String inAccount;
-        //登录账号
-    	@Condition
+    @Condition
     private String outAccount;
-        //登录账号
-    	@Condition
+    @Condition
     private String invalidAccount;
-        //登录账号
-    	@Condition
+    @Condition
     private String prodAccount;
+    @Condition
+    private String customerName;
 
 }

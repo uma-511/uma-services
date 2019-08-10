@@ -1,5 +1,9 @@
 package com.lgmn.umaservices.basic.entity;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.SelectBeforeUpdate;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -8,11 +12,14 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "label_record", schema = "uma", catalog = "")
+@DynamicUpdate
+@DynamicInsert
+@SelectBeforeUpdate
 public class LabelRecordEntity implements Serializable {
     private int id;
     private String labelNum;
     private Integer packId;
-    private int orderId;
+    private Integer orderId;
     private Integer prodId;
     private Integer modelId;
     private Integer status;
@@ -29,10 +36,14 @@ public class LabelRecordEntity implements Serializable {
     private String outUser;
     private String invalidUser;
     private Byte recordType;
-    private int quantity;
+    private Integer quantity;
+    private String machineNum;
+    private String banci;
+    private String specs;
+    private String deliveryNum;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     public int getId() {
         return id;
     }
@@ -42,7 +53,7 @@ public class LabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "label_num")
+    @Column(name = "label_num", nullable = true, length = 18)
     public String getLabelNum() {
         return labelNum;
     }
@@ -52,7 +63,7 @@ public class LabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "pack_id")
+    @Column(name = "pack_id", nullable = true)
     public Integer getPackId() {
         return packId;
     }
@@ -62,17 +73,17 @@ public class LabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "order_id")
-    public int getOrderId() {
+    @Column(name = "order_id", nullable = false)
+    public Integer getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(Integer orderId) {
         this.orderId = orderId;
     }
 
     @Basic
-    @Column(name = "prod_id")
+    @Column(name = "prod_id", nullable = true)
     public Integer getProdId() {
         return prodId;
     }
@@ -82,7 +93,7 @@ public class LabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "model_id")
+    @Column(name = "model_id", nullable = true)
     public Integer getModelId() {
         return modelId;
     }
@@ -92,7 +103,7 @@ public class LabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "status")
+    @Column(name = "status", nullable = true)
     public Integer getStatus() {
         return status;
     }
@@ -102,7 +113,7 @@ public class LabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "prod_time")
+    @Column(name = "prod_time", nullable = true)
     public Timestamp getProdTime() {
         return prodTime;
     }
@@ -112,7 +123,7 @@ public class LabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "in_time")
+    @Column(name = "in_time", nullable = true)
     public Timestamp getInTime() {
         return inTime;
     }
@@ -122,7 +133,7 @@ public class LabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "out_time")
+    @Column(name = "out_time", nullable = true)
     public Timestamp getOutTime() {
         return outTime;
     }
@@ -132,7 +143,7 @@ public class LabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "invalid_time")
+    @Column(name = "invalid_time", nullable = true)
     public Timestamp getInvalidTime() {
         return invalidTime;
     }
@@ -142,7 +153,7 @@ public class LabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "label_type")
+    @Column(name = "label_type", nullable = true)
     public Integer getLabelType() {
         return labelType;
     }
@@ -152,7 +163,7 @@ public class LabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "net_weight")
+    @Column(name = "net_weight", nullable = true, precision = 2)
     public BigDecimal getNetWeight() {
         return netWeight;
     }
@@ -162,7 +173,7 @@ public class LabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "gross_weight")
+    @Column(name = "gross_weight", nullable = true, precision = 2)
     public BigDecimal getGrossWeight() {
         return grossWeight;
     }
@@ -172,7 +183,7 @@ public class LabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "skin_weight")
+    @Column(name = "skin_weight", nullable = true, precision = 2)
     public BigDecimal getSkinWeight() {
         return skinWeight;
     }
@@ -182,7 +193,7 @@ public class LabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "prod_user")
+    @Column(name = "prod_user", nullable = true, length = 32)
     public String getProdUser() {
         return prodUser;
     }
@@ -192,7 +203,7 @@ public class LabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "in_user")
+    @Column(name = "in_user", nullable = true, length = 32)
     public String getInUser() {
         return inUser;
     }
@@ -202,7 +213,7 @@ public class LabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "out_user")
+    @Column(name = "out_user", nullable = true, length = 32)
     public String getOutUser() {
         return outUser;
     }
@@ -212,7 +223,7 @@ public class LabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "invalid_user")
+    @Column(name = "invalid_user", nullable = true, length = 32)
     public String getInvalidUser() {
         return invalidUser;
     }
@@ -222,7 +233,7 @@ public class LabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "record_type")
+    @Column(name = "record_type", nullable = true)
     public Byte getRecordType() {
         return recordType;
     }
@@ -232,45 +243,89 @@ public class LabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "quantity")
-    public int getQuantity() {
+    @Column(name = "quantity", nullable = true)
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    @Basic
+    @Column(name = "machine_num", nullable = true, length = 20)
+    public String getMachineNum() {
+        return machineNum;
+    }
+
+    public void setMachineNum(String machineNum) {
+        this.machineNum = machineNum;
+    }
+
+    @Basic
+    @Column(name = "specs", nullable = true, length = 20)
+    public String getSpecs() {
+        return specs;
+    }
+
+    public void setSpecs(String specs) {
+        this.specs = specs;
+    }
+
+    @Basic
+    @Column(name = "banci", nullable = true, length = 20)
+    public String getBanci() {
+        return banci;
+    }
+
+    public void setBanci(String banci) {
+        this.banci = banci;
+    }
+
+    @Basic
+    @Column(name = "delivery_num", nullable = true, length = 20)
+    public String getDeliveryNum() {
+        return deliveryNum;
+    }
+
+    public void setDeliveryNum(String deliveryNum) {
+        this.deliveryNum = deliveryNum;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LabelRecordEntity that = (LabelRecordEntity) o;
-        return id == that.id &&
-                orderId == that.orderId &&
-                quantity == that.quantity &&
-                Objects.equals(labelNum, that.labelNum) &&
-                Objects.equals(packId, that.packId) &&
-                Objects.equals(prodId, that.prodId) &&
-                Objects.equals(modelId, that.modelId) &&
-                Objects.equals(status, that.status) &&
-                Objects.equals(prodTime, that.prodTime) &&
-                Objects.equals(inTime, that.inTime) &&
-                Objects.equals(outTime, that.outTime) &&
-                Objects.equals(invalidTime, that.invalidTime) &&
-                Objects.equals(labelType, that.labelType) &&
-                Objects.equals(netWeight, that.netWeight) &&
-                Objects.equals(grossWeight, that.grossWeight) &&
-                Objects.equals(skinWeight, that.skinWeight) &&
-                Objects.equals(prodUser, that.prodUser) &&
-                Objects.equals(inUser, that.inUser) &&
-                Objects.equals(outUser, that.outUser) &&
-                Objects.equals(invalidUser, that.invalidUser) &&
-                Objects.equals(recordType, that.recordType);
+        LabelRecordEntity entity = (LabelRecordEntity) o;
+        return id == entity.id &&
+                Objects.equals(orderId, entity.orderId) &&
+                Objects.equals(labelNum, entity.labelNum) &&
+                Objects.equals(packId, entity.packId) &&
+                Objects.equals(prodId, entity.prodId) &&
+                Objects.equals(modelId, entity.modelId) &&
+                Objects.equals(status, entity.status) &&
+                Objects.equals(prodTime, entity.prodTime) &&
+                Objects.equals(inTime, entity.inTime) &&
+                Objects.equals(outTime, entity.outTime) &&
+                Objects.equals(invalidTime, entity.invalidTime) &&
+                Objects.equals(labelType, entity.labelType) &&
+                Objects.equals(netWeight, entity.netWeight) &&
+                Objects.equals(grossWeight, entity.grossWeight) &&
+                Objects.equals(skinWeight, entity.skinWeight) &&
+                Objects.equals(prodUser, entity.prodUser) &&
+                Objects.equals(inUser, entity.inUser) &&
+                Objects.equals(outUser, entity.outUser) &&
+                Objects.equals(invalidUser, entity.invalidUser) &&
+                Objects.equals(recordType, entity.recordType) &&
+                Objects.equals(quantity, entity.quantity) &&
+                Objects.equals(machineNum, entity.machineNum) &&
+                Objects.equals(banci, entity.banci)&&
+                Objects.equals(specs, entity.specs)&&
+                Objects.equals(deliveryNum, entity.deliveryNum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, labelNum, packId, orderId, prodId, modelId, status, prodTime, inTime, outTime, invalidTime, labelType, netWeight, grossWeight, skinWeight, prodUser, inUser, outUser, invalidUser, recordType, quantity);
+        return Objects.hash(id, labelNum, packId, orderId, prodId, modelId, status, prodTime, inTime, outTime, invalidTime, labelType, netWeight, grossWeight, skinWeight, prodUser, inUser, outUser, invalidUser, recordType, quantity, machineNum, banci,specs,deliveryNum);
     }
 }

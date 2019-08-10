@@ -1,5 +1,6 @@
 package com.lgmn.umaservices.basic.dto;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import com.lgmn.common.annotation.Condition;
 import com.lgmn.common.domain.LgmnDto;
@@ -33,7 +34,11 @@ public class DeliveryNoteDto extends LgmnDto {
     private String carNum;
     //开单时间
     @Condition
-    private Date createTime;
+    private Timestamp createTime;
+    @Condition(except = ConditionExcept.BETWEEN_AND, isMin = true, field = "createTime")
+    private Timestamp startCreateTime;
+    @Condition(except = ConditionExcept.BETWEEN_AND, isMax = true, field = "createTime")
+    private Timestamp endCreateTime;
     //开单人
     @Condition(except = ConditionExcept.CONTAIN)
     private String createUser;
@@ -49,5 +54,6 @@ public class DeliveryNoteDto extends LgmnDto {
     //删除标识
     @Condition
     private Integer delFlag;
-
+    @Condition
+    private Integer printed;
 }

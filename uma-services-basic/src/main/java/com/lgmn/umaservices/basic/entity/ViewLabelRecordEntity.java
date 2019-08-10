@@ -28,19 +28,22 @@ public class ViewLabelRecordEntity implements Serializable {
     private String inUser;
     private String outUser;
     private String invalidUser;
-    private Byte recordType;
-    private int quantity;
+    private Integer recordType;
+    private Integer quantity;
+    private String machineNum;
+    private String banci;
     private String orderNo;
     private Integer clientId;
     private String requirement;
     private Timestamp deliveryDate;
     private Integer orderQuantity;
-    private Integer floor;
+    private String floor;
     private Integer perPackQuantity;
     private String productName;
     private String modelName;
     private BigDecimal longs;
     private BigDecimal weight;
+    private String width;
     private String materialQuality;
     private String lines;
     private String specs;
@@ -50,7 +53,9 @@ public class ViewLabelRecordEntity implements Serializable {
     private String outAccount;
     private String invalidAccount;
     private String prodAccount;
+    private String customerName;
 
+    @Basic
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {
@@ -243,26 +248,46 @@ public class ViewLabelRecordEntity implements Serializable {
 
     @Basic
     @Column(name = "record_type", nullable = true)
-    public Byte getRecordType() {
+    public Integer getRecordType() {
         return recordType;
     }
 
-    public void setRecordType(Byte recordType) {
+    public void setRecordType(Integer recordType) {
         this.recordType = recordType;
     }
 
     @Basic
-    @Column(name = "quantity", nullable = false)
-    public int getQuantity() {
+    @Column(name = "quantity", nullable = true)
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
     @Basic
-    @Column(name = "order_no", nullable = true, length = 12)
+    @Column(name = "machine_num", nullable = true, length = 20)
+    public String getMachineNum() {
+        return machineNum;
+    }
+
+    public void setMachineNum(String machineNum) {
+        this.machineNum = machineNum;
+    }
+
+    @Basic
+    @Column(name = "banci", nullable = true, length = 20)
+    public String getBanci() {
+        return banci;
+    }
+
+    public void setBanci(String banci) {
+        this.banci = banci;
+    }
+
+    @Basic
+    @Column(name = "order_no", nullable = true, length = 20)
     public String getOrderNo() {
         return orderNo;
     }
@@ -312,12 +337,12 @@ public class ViewLabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "floor", nullable = true)
-    public Integer getFloor() {
+    @Column(name = "floor", nullable = true, length = 10)
+    public String getFloor() {
         return floor;
     }
 
-    public void setFloor(Integer floor) {
+    public void setFloor(String floor) {
         this.floor = floor;
     }
 
@@ -332,7 +357,7 @@ public class ViewLabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "product_name", nullable = true, length = 50)
+    @Column(name = "product_name", nullable = true, length = 30)
     public String getProductName() {
         return productName;
     }
@@ -342,7 +367,7 @@ public class ViewLabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "model_name", nullable = true, length = 60)
+    @Column(name = "model_name", nullable = true, length = 30)
     public String getModelName() {
         return modelName;
     }
@@ -372,6 +397,16 @@ public class ViewLabelRecordEntity implements Serializable {
     }
 
     @Basic
+    @Column(name = "width", nullable = true, length = 30)
+    public String getWidth() {
+        return width;
+    }
+
+    public void setWidth(String width) {
+        this.width = width;
+    }
+
+    @Basic
     @Column(name = "material_quality", nullable = true, length = 100)
     public String getMaterialQuality() {
         return materialQuality;
@@ -392,7 +427,7 @@ public class ViewLabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "specs", nullable = true, length = 100)
+    @Column(name = "specs", nullable = true, length = 30)
     public String getSpecs() {
         return specs;
     }
@@ -412,7 +447,7 @@ public class ViewLabelRecordEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "color", nullable = true, length = 10)
+    @Column(name = "color", nullable = true, length = 20)
     public String getColor() {
         return color;
     }
@@ -461,6 +496,16 @@ public class ViewLabelRecordEntity implements Serializable {
         this.prodAccount = prodAccount;
     }
 
+    @Basic
+    @Column(name = "customer_name", nullable = true, length = 100)
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -468,7 +513,6 @@ public class ViewLabelRecordEntity implements Serializable {
         ViewLabelRecordEntity that = (ViewLabelRecordEntity) o;
         return id == that.id &&
                 orderId == that.orderId &&
-                quantity == that.quantity &&
                 Objects.equals(labelNum, that.labelNum) &&
                 Objects.equals(packId, that.packId) &&
                 Objects.equals(prodId, that.prodId) &&
@@ -487,6 +531,9 @@ public class ViewLabelRecordEntity implements Serializable {
                 Objects.equals(outUser, that.outUser) &&
                 Objects.equals(invalidUser, that.invalidUser) &&
                 Objects.equals(recordType, that.recordType) &&
+                Objects.equals(quantity, that.quantity) &&
+                Objects.equals(machineNum, that.machineNum) &&
+                Objects.equals(banci, that.banci) &&
                 Objects.equals(orderNo, that.orderNo) &&
                 Objects.equals(clientId, that.clientId) &&
                 Objects.equals(requirement, that.requirement) &&
@@ -498,6 +545,7 @@ public class ViewLabelRecordEntity implements Serializable {
                 Objects.equals(modelName, that.modelName) &&
                 Objects.equals(longs, that.longs) &&
                 Objects.equals(weight, that.weight) &&
+                Objects.equals(width, that.width) &&
                 Objects.equals(materialQuality, that.materialQuality) &&
                 Objects.equals(lines, that.lines) &&
                 Objects.equals(specs, that.specs) &&
@@ -506,11 +554,12 @@ public class ViewLabelRecordEntity implements Serializable {
                 Objects.equals(inAccount, that.inAccount) &&
                 Objects.equals(outAccount, that.outAccount) &&
                 Objects.equals(invalidAccount, that.invalidAccount) &&
-                Objects.equals(prodAccount, that.prodAccount);
+                Objects.equals(prodAccount, that.prodAccount) &&
+                Objects.equals(customerName, that.customerName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, labelNum, packId, orderId, prodId, modelId, status, prodTime, inTime, outTime, invalidTime, labelType, netWeight, grossWeight, skinWeight, prodUser, inUser, outUser, invalidUser, recordType, quantity, orderNo, clientId, requirement, deliveryDate, orderQuantity, floor, perPackQuantity, productName, modelName, longs, weight, materialQuality, lines, specs, yard, color, inAccount, outAccount, invalidAccount, prodAccount);
+        return Objects.hash(id, labelNum, packId, orderId, prodId, modelId, status, prodTime, inTime, outTime, invalidTime, labelType, netWeight, grossWeight, skinWeight, prodUser, inUser, outUser, invalidUser, recordType, quantity, machineNum, banci, orderNo, clientId, requirement, deliveryDate, orderQuantity, floor, perPackQuantity, productName, modelName, longs, weight, width, materialQuality, lines, specs, yard, color, inAccount, outAccount, invalidAccount, prodAccount, customerName);
     }
 }

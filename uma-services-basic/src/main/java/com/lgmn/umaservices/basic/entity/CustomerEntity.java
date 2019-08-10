@@ -1,7 +1,8 @@
 package com.lgmn.umaservices.basic.entity;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.SelectBeforeUpdate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,7 +11,9 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "customer", schema = "uma", catalog = "")
-@EntityListeners(AuditingEntityListener.class)
+@DynamicUpdate
+@DynamicInsert
+@SelectBeforeUpdate
 public class CustomerEntity implements Serializable {
     private int id;
     private String name;
@@ -18,13 +21,18 @@ public class CustomerEntity implements Serializable {
     private String fax;
     private String address;
     private String remark;
+    private String createUserId;
     private String createUser;
     private Timestamp createTime;
     private int delFlag;
     private String customerCode;
+    private String contacts;
+    private String logistics;
+    private String logisticsPhone;
+    private String logisticsAddress;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     public int getId() {
         return id;
     }
@@ -34,7 +42,7 @@ public class CustomerEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, length = 100)
     public String getName() {
         return name;
     }
@@ -44,7 +52,7 @@ public class CustomerEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "phone")
+    @Column(name = "phone", nullable = true, length = 20)
     public String getPhone() {
         return phone;
     }
@@ -54,7 +62,7 @@ public class CustomerEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "fax")
+    @Column(name = "fax", nullable = true, length = 20)
     public String getFax() {
         return fax;
     }
@@ -64,7 +72,7 @@ public class CustomerEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "address")
+    @Column(name = "address", nullable = true, length = 200)
     public String getAddress() {
         return address;
     }
@@ -74,7 +82,7 @@ public class CustomerEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "remark")
+    @Column(name = "remark", nullable = true, length = 500)
     public String getRemark() {
         return remark;
     }
@@ -84,7 +92,17 @@ public class CustomerEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "create_user")
+    @Column(name = "create_user_id", nullable = true, length = 32)
+    public String getCreateUserId() {
+        return createUserId;
+    }
+
+    public void setCreateUserId(String createUserId) {
+        this.createUserId = createUserId;
+    }
+
+    @Basic
+    @Column(name = "create_user", nullable = true, length = 30)
     public String getCreateUser() {
         return createUser;
     }
@@ -94,8 +112,7 @@ public class CustomerEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "create_time")
-    @CreatedDate
+    @Column(name = "create_time", nullable = true)
     public Timestamp getCreateTime() {
         return createTime;
     }
@@ -105,7 +122,7 @@ public class CustomerEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "del_flag")
+    @Column(name = "del_flag", nullable = false)
     public int getDelFlag() {
         return delFlag;
     }
@@ -115,13 +132,53 @@ public class CustomerEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "customer_code")
+    @Column(name = "customer_code", nullable = true, length = 50)
     public String getCustomerCode() {
         return customerCode;
     }
 
     public void setCustomerCode(String customerCode) {
         this.customerCode = customerCode;
+    }
+
+    @Basic
+    @Column(name = "contacts", nullable = true, length = 20)
+    public String getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(String contacts) {
+        this.contacts = contacts;
+    }
+
+    @Basic
+    @Column(name = "logistics", nullable = true, length = 30)
+    public String getLogistics() {
+        return logistics;
+    }
+
+    public void setLogistics(String logistics) {
+        this.logistics = logistics;
+    }
+
+    @Basic
+    @Column(name = "logistics_phone", nullable = true, length = 20)
+    public String getLogisticsPhone() {
+        return logisticsPhone;
+    }
+
+    public void setLogisticsPhone(String logisticsPhone) {
+        this.logisticsPhone = logisticsPhone;
+    }
+
+    @Basic
+    @Column(name = "logistics_address", nullable = true, length = 200)
+    public String getLogisticsAddress() {
+        return logisticsAddress;
+    }
+
+    public void setLogisticsAddress(String logisticsAddress) {
+        this.logisticsAddress = logisticsAddress;
     }
 
     @Override
@@ -136,13 +193,18 @@ public class CustomerEntity implements Serializable {
                 Objects.equals(fax, that.fax) &&
                 Objects.equals(address, that.address) &&
                 Objects.equals(remark, that.remark) &&
+                Objects.equals(createUserId, that.createUserId) &&
                 Objects.equals(createUser, that.createUser) &&
                 Objects.equals(createTime, that.createTime) &&
-                Objects.equals(customerCode, that.customerCode);
+                Objects.equals(customerCode, that.customerCode) &&
+                Objects.equals(contacts, that.contacts) &&
+                Objects.equals(logistics, that.logistics) &&
+                Objects.equals(logisticsPhone, that.logisticsPhone) &&
+                Objects.equals(logisticsAddress, that.logisticsAddress);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, phone, fax, address, remark, createUser, createTime, delFlag, customerCode);
+        return Objects.hash(id, name, phone, fax, address, remark, createUserId, createUser, createTime, delFlag, customerCode, contacts, logistics, logisticsPhone, logisticsAddress);
     }
 }

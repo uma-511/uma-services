@@ -25,6 +25,9 @@ public class CustomerDto extends LgmnDto {
     //备注
     @Condition
     private String remark;
+    //创建用户id
+    @Condition
+    private String createUserId;
     //创建用户（保存用户名）
     @Condition
     private String createUser;
@@ -37,5 +40,17 @@ public class CustomerDto extends LgmnDto {
     // 客户代码
     @Condition
     private String customerCode;
+
+    @Condition
+    private String contacts;
+
+    @Condition
+    private String logistics;
+
+    @Condition
+    private String logisticsPhone;
+
+    @Condition
+    private String logisticsAddress;
 
 }

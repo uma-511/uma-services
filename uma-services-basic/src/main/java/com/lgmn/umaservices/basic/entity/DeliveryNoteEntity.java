@@ -1,7 +1,8 @@
 package com.lgmn.umaservices.basic.entity;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.SelectBeforeUpdate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,9 +11,12 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "delivery_note", schema = "uma", catalog = "")
-@EntityListeners(AuditingEntityListener.class)
+@DynamicUpdate
+@DynamicInsert
+@SelectBeforeUpdate
 public class DeliveryNoteEntity implements Serializable {
     private int id;
+    private Integer customerId;
     private String customer;
     private String contact;
     private String address;
@@ -26,9 +30,10 @@ public class DeliveryNoteEntity implements Serializable {
     private String store;
     private String revicer;
     private int delFlag;
+    private int printed;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     public int getId() {
         return id;
     }
@@ -38,7 +43,17 @@ public class DeliveryNoteEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "customer")
+    @Column(name = "customer_id", nullable = true)
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
+    @Basic
+    @Column(name = "customer", nullable = true, length = 100)
     public String getCustomer() {
         return customer;
     }
@@ -48,7 +63,7 @@ public class DeliveryNoteEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "contact")
+    @Column(name = "contact", nullable = true, length = 20)
     public String getContact() {
         return contact;
     }
@@ -58,7 +73,7 @@ public class DeliveryNoteEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "address")
+    @Column(name = "address", nullable = true, length = 200)
     public String getAddress() {
         return address;
     }
@@ -68,7 +83,7 @@ public class DeliveryNoteEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "phone")
+    @Column(name = "phone", nullable = true, length = 20)
     public String getPhone() {
         return phone;
     }
@@ -78,7 +93,7 @@ public class DeliveryNoteEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "delivery_num")
+    @Column(name = "delivery_num", nullable = true, length = 32)
     public String getDeliveryNum() {
         return deliveryNum;
     }
@@ -88,7 +103,7 @@ public class DeliveryNoteEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "driver")
+    @Column(name = "driver", nullable = true, length = 20)
     public String getDriver() {
         return driver;
     }
@@ -98,7 +113,7 @@ public class DeliveryNoteEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "car_num")
+    @Column(name = "car_num", nullable = true, length = 20)
     public String getCarNum() {
         return carNum;
     }
@@ -108,8 +123,7 @@ public class DeliveryNoteEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "create_time")
-    @CreatedDate
+    @Column(name = "create_time", nullable = true)
     public Timestamp getCreateTime() {
         return createTime;
     }
@@ -119,7 +133,7 @@ public class DeliveryNoteEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "create_user")
+    @Column(name = "create_user", nullable = false, length = 32)
     public String getCreateUser() {
         return createUser;
     }
@@ -129,7 +143,7 @@ public class DeliveryNoteEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "remark")
+    @Column(name = "remark", nullable = true, length = 500)
     public String getRemark() {
         return remark;
     }
@@ -139,7 +153,7 @@ public class DeliveryNoteEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "store")
+    @Column(name = "store", nullable = true, length = 20)
     public String getStore() {
         return store;
     }
@@ -149,7 +163,7 @@ public class DeliveryNoteEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "revicer")
+    @Column(name = "revicer", nullable = true, length = 20)
     public String getRevicer() {
         return revicer;
     }
@@ -159,13 +173,23 @@ public class DeliveryNoteEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "del_flag")
+    @Column(name = "del_flag", nullable = false)
     public int getDelFlag() {
         return delFlag;
     }
 
     public void setDelFlag(int delFlag) {
         this.delFlag = delFlag;
+    }
+
+    @Basic
+    @Column(name = "printed", nullable = false)
+    public int getPrinted() {
+        return printed;
+    }
+
+    public void setPrinted(int printed) {
+        this.printed = printed;
     }
 
     @Override
@@ -175,6 +199,8 @@ public class DeliveryNoteEntity implements Serializable {
         DeliveryNoteEntity that = (DeliveryNoteEntity) o;
         return id == that.id &&
                 delFlag == that.delFlag &&
+                printed == that.printed &&
+                Objects.equals(customerId, that.customerId) &&
                 Objects.equals(customer, that.customer) &&
                 Objects.equals(contact, that.contact) &&
                 Objects.equals(address, that.address) &&
@@ -191,6 +217,6 @@ public class DeliveryNoteEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, customer, contact, address, phone, deliveryNum, driver, carNum, createTime, createUser, remark, store, revicer, delFlag);
+        return Objects.hash(id, customerId, customer, contact, address, phone, deliveryNum, driver, carNum, createTime, createUser, remark, store, revicer, delFlag, printed);
     }
 }

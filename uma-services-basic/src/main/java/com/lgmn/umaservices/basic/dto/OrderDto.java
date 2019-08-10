@@ -1,5 +1,7 @@
 package com.lgmn.umaservices.basic.dto;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Date;
 import com.lgmn.common.annotation.Condition;
 import com.lgmn.common.domain.LgmnDto;
@@ -32,13 +34,13 @@ public class OrderDto extends LgmnDto {
     private Integer lableId;
         //订单创建时间
     	@Condition
-    private Date createTime;
+    private Timestamp createTime;
         //订单创建人
     	@Condition
     private String createUser;
         //交货时间
     	@Condition
-    private Date deliveryDate;
+    private Timestamp deliveryDate;
         //数量
     	@Condition
     private Integer quantity;
@@ -104,34 +106,34 @@ public class OrderDto extends LgmnDto {
     private String var2005;
         //保留datetime1
     	@Condition
-    private Date datetime1;
+    private Timestamp datetime1;
         //保留datetime2
     	@Condition
-    private Date datetime2;
+    private Timestamp datetime2;
         //保留decimal(10,2)1
     	@Condition
-    private Double decimal1021;
+    private BigDecimal decimal1021;
         //保留decimal(10,2)2
     	@Condition
-    private Double decimal1022;
+    private BigDecimal decimal1022;
         //保留decimal(10,2)3
     	@Condition
-    private Double decimal1023;
+    private BigDecimal decimal1023;
         //保留decimal(10,2)4
     	@Condition
-    private Double decimal1024;
+    private BigDecimal decimal1024;
         //保留decimal(11,3)1
     	@Condition
-    private Double decimal1131;
+    private BigDecimal decimal1131;
         //保留decimal(11,3)2
     	@Condition
-    private Double decimal1132;
+    private BigDecimal decimal1132;
         //保留decimal(11,3)3
     	@Condition
-    private Double decimal1133;
+    private BigDecimal decimal1133;
         //保留decimal(11,3)4
     	@Condition
-    private Double decimal1134;
+    private BigDecimal decimal1134;
     @Condition
     private Integer delFlag;
 

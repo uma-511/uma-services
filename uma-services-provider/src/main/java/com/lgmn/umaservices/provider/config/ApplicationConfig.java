@@ -19,8 +19,8 @@ public class ApplicationConfig {
      *
      * @Return: GlobalTransactionScanner
      */
-    @Bean
-    public GlobalTransactionScanner globalTransactionScanner(){
-        return new GlobalTransactionScanner("umaservices-provider", "my_test_tx_group");
-    }
+//    @Bean
+//    public GlobalTransactionScanner globalTransactionScanner(){
+//        return new GlobalTransactionScanner("umaservices-provider", "my_test_tx_group");
+//    }
 }
