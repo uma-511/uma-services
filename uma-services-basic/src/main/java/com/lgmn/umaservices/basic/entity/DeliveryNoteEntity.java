@@ -1,9 +1,5 @@
 package com.lgmn.umaservices.basic.entity;
 
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.SelectBeforeUpdate;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -11,9 +7,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "delivery_note", schema = "uma", catalog = "")
-@DynamicUpdate
-@DynamicInsert
-@SelectBeforeUpdate
 public class DeliveryNoteEntity implements Serializable {
     private int id;
     private Integer customerId;
@@ -29,8 +22,11 @@ public class DeliveryNoteEntity implements Serializable {
     private String remark;
     private String store;
     private String revicer;
-    private int delFlag;
-    private int printed;
+    private Integer delFlag;
+    private Integer printed;
+    private Integer hadPaid;
+    private Timestamp paymentTime;
+    private String payConfirmer;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -123,7 +119,7 @@ public class DeliveryNoteEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "create_time", nullable = true)
+    @Column(name = "create_time", nullable = false)
     public Timestamp getCreateTime() {
         return createTime;
     }
@@ -133,7 +129,7 @@ public class DeliveryNoteEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "create_user", nullable = false, length = 32)
+    @Column(name = "create_user", nullable = false, length = 20)
     public String getCreateUser() {
         return createUser;
     }
@@ -173,23 +169,53 @@ public class DeliveryNoteEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "del_flag", nullable = false)
-    public int getDelFlag() {
+    @Column(name = "del_flag", nullable = true)
+    public Integer getDelFlag() {
         return delFlag;
     }
 
-    public void setDelFlag(int delFlag) {
+    public void setDelFlag(Integer delFlag) {
         this.delFlag = delFlag;
     }
 
     @Basic
-    @Column(name = "printed", nullable = false)
-    public int getPrinted() {
+    @Column(name = "printed", nullable = true)
+    public Integer getPrinted() {
         return printed;
     }
 
-    public void setPrinted(int printed) {
+    public void setPrinted(Integer printed) {
         this.printed = printed;
+    }
+
+    @Basic
+    @Column(name = "had_paid", nullable = true)
+    public Integer getHadPaid() {
+        return hadPaid;
+    }
+
+    public void setHadPaid(Integer hadPaid) {
+        this.hadPaid = hadPaid;
+    }
+
+    @Basic
+    @Column(name = "payment_time", nullable = true)
+    public Timestamp getPaymentTime() {
+        return paymentTime;
+    }
+
+    public void setPaymentTime(Timestamp paymentTime) {
+        this.paymentTime = paymentTime;
+    }
+
+    @Basic
+    @Column(name = "pay_confirmer", nullable = true, length = 20)
+    public String getPayConfirmer() {
+        return payConfirmer;
+    }
+
+    public void setPayConfirmer(String payConfirmer) {
+        this.payConfirmer = payConfirmer;
     }
 
     @Override
@@ -198,8 +224,6 @@ public class DeliveryNoteEntity implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         DeliveryNoteEntity that = (DeliveryNoteEntity) o;
         return id == that.id &&
-                delFlag == that.delFlag &&
-                printed == that.printed &&
                 Objects.equals(customerId, that.customerId) &&
                 Objects.equals(customer, that.customer) &&
                 Objects.equals(contact, that.contact) &&
@@ -212,11 +236,16 @@ public class DeliveryNoteEntity implements Serializable {
                 Objects.equals(createUser, that.createUser) &&
                 Objects.equals(remark, that.remark) &&
                 Objects.equals(store, that.store) &&
-                Objects.equals(revicer, that.revicer);
+                Objects.equals(revicer, that.revicer) &&
+                Objects.equals(delFlag, that.delFlag) &&
+                Objects.equals(printed, that.printed) &&
+                Objects.equals(hadPaid, that.hadPaid) &&
+                Objects.equals(paymentTime, that.paymentTime) &&
+                Objects.equals(payConfirmer, that.payConfirmer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, customerId, customer, contact, address, phone, deliveryNum, driver, carNum, createTime, createUser, remark, store, revicer, delFlag, printed);
+        return Objects.hash(id, customerId, customer, contact, address, phone, deliveryNum, driver, carNum, createTime, createUser, remark, store, revicer, delFlag, printed, hadPaid, paymentTime, payConfirmer);
     }
 }

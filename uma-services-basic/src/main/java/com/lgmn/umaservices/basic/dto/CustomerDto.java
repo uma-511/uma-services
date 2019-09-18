@@ -52,5 +52,9 @@ public class CustomerDto extends LgmnDto {
 
     @Condition
     private String logisticsAddress;
+    @Condition
+    private Integer orderReminder;
+    @Condition
+    private Integer hadReminded;
 
 }

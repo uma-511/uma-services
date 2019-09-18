@@ -1,5 +1,6 @@
 package com.lgmn.umaservices.basic.dto;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 import com.lgmn.common.annotation.Condition;
@@ -9,72 +10,76 @@ import lombok.Data;
 
 @Data
 public class YjOrderDto extends LgmnDto {
-    	@Condition
+    @Condition
     private Integer id;
-        //订单编号
-    	@Condition(except = ConditionExcept.CONTAIN,ignoreEmpty = true)
+    //订单编号
+    @Condition(except = ConditionExcept.CONTAIN, ignoreEmpty = true)
     private String orderNum;
-        //产品编号
-    	@Condition(ignoreEmpty = true)
+    //产品编号
+    @Condition(ignoreEmpty = true)
     private String number;
-        //名称(uma_config)
-    	@Condition(ignoreEmpty = true)
+    //名称(uma_config)
+    @Condition(ignoreEmpty = true)
     private String name;
-        //规格(uma_config)
-    	@Condition(ignoreEmpty = true)
+    //规格(uma_config)
+    @Condition(ignoreEmpty = true)
     private String specs;
-        //宽度(uma_config)
-    	@Condition(ignoreEmpty = true)
+    //宽度(uma_config)
+    @Condition(ignoreEmpty = true)
     private String width;
-        //颜色(uma_config)
-    	@Condition(ignoreEmpty = true)
+    //颜色(uma_config)
+    @Condition(ignoreEmpty = true)
     private String color;
-        //标签格式
-    	@Condition
+    //标签格式
+    @Condition
     private Integer labelId;
-        //便签格式名称
-    	@Condition(ignoreEmpty = true)
+    //便签格式名称
+    @Condition(ignoreEmpty = true)
     private String labelName;
-        //工艺要求
-    	@Condition
+    //工艺要求
+    @Condition
     private String requirement;
-        //计划数量
-    	@Condition
+    //计划数量
+    @Condition
     private Integer plannedQuantity;
-        //每包饼数
-    	@Condition
+    //每包饼数
+    @Condition
     private Integer perPackQuantity;
-        //备注
-    	@Condition
+    //备注
+    @Condition
     private String remark;
-        //交货日期
-    	@Condition
+    //交货日期
+    @Condition
     private Timestamp deliveryDate;
-        //客户id
-    	@Condition
+    //客户id
+    @Condition
     private Integer clientId;
-        //客户名
-    	@Condition(ignoreEmpty = true)
+    //客户名
+    @Condition(ignoreEmpty = true)
     private String clientName;
-        //楼层(uma_config)
-    	@Condition(ignoreEmpty = true)
+    //楼层(uma_config)
+    @Condition(ignoreEmpty = true)
     private String floor;
-        //创建人id
-    	@Condition
+    //创建人id
+    @Condition
     private String createUserId;
-        //创建人名称
-    	@Condition
+    //创建人名称
+    @Condition
     private String createUser;
-        //创建时间
-    	@Condition
+    //创建时间
+    @Condition
     private Timestamp createTime;
     @Condition(except = ConditionExcept.BETWEEN_AND, isMin = true, field = "createTime")
     private Timestamp startCreateTime;
     @Condition(except = ConditionExcept.BETWEEN_AND, isMax = true, field = "createTime")
     private Timestamp endCreateTime;
+    @Condition
+    private Integer alertDay;
+    @Condition
+    private BigDecimal lookboardThreshold;
 
-        //删除标识： 0 未删除， 1 已删除
-    	@Condition
+    //删除标识： 0 未删除， 1 已删除
+    @Condition
     private Integer delFlag;
 
 }

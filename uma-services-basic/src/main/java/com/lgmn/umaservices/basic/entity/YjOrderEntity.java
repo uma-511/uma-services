@@ -1,19 +1,13 @@
 package com.lgmn.umaservices.basic.entity;
 
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.SelectBeforeUpdate;
-
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
 @Table(name = "yj_order", schema = "uma", catalog = "")
-@DynamicUpdate
-@DynamicInsert
-@SelectBeforeUpdate
 public class YjOrderEntity implements Serializable {
     private int id;
     private String orderNum;
@@ -35,10 +29,11 @@ public class YjOrderEntity implements Serializable {
     private String createUserId;
     private String createUser;
     private Timestamp createTime;
+    private Integer alertDay;
+    private BigDecimal lookboardThreshold;
     private Integer delFlag;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -239,7 +234,27 @@ public class YjOrderEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "del_flag", nullable = true, length = 255)
+    @Column(name = "alert_day", nullable = true)
+    public Integer getAlertDay() {
+        return alertDay;
+    }
+
+    public void setAlertDay(Integer alertDay) {
+        this.alertDay = alertDay;
+    }
+
+    @Basic
+    @Column(name = "lookboard_threshold", nullable = true, precision = 2)
+    public BigDecimal getLookboardThreshold() {
+        return lookboardThreshold;
+    }
+
+    public void setLookboardThreshold(BigDecimal lookboardThreshold) {
+        this.lookboardThreshold = lookboardThreshold;
+    }
+
+    @Basic
+    @Column(name = "del_flag", nullable = true)
     public Integer getDelFlag() {
         return delFlag;
     }
@@ -247,37 +262,38 @@ public class YjOrderEntity implements Serializable {
     public void setDelFlag(Integer delFlag) {
         this.delFlag = delFlag;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        YjOrderEntity that = (YjOrderEntity) o;
-        return id == that.id &&
-                Objects.equals(orderNum, that.orderNum) &&
-                Objects.equals(number, that.number) &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(specs, that.specs) &&
-                Objects.equals(width, that.width) &&
-                Objects.equals(color, that.color) &&
-                Objects.equals(labelId, that.labelId) &&
-                Objects.equals(labelName, that.labelName) &&
-                Objects.equals(requirement, that.requirement) &&
-                Objects.equals(plannedQuantity, that.plannedQuantity) &&
-                Objects.equals(perPackQuantity, that.perPackQuantity) &&
-                Objects.equals(remark, that.remark) &&
-                Objects.equals(deliveryDate, that.deliveryDate) &&
-                Objects.equals(clientId, that.clientId) &&
-                Objects.equals(clientName, that.clientName) &&
-                Objects.equals(floor, that.floor) &&
-                Objects.equals(createUserId, that.createUserId) &&
-                Objects.equals(createUser, that.createUser) &&
-                Objects.equals(createTime, that.createTime) &&
-                Objects.equals(delFlag, that.delFlag);
+        YjOrderEntity entity = (YjOrderEntity) o;
+        return id == entity.id &&
+                Objects.equals(orderNum, entity.orderNum) &&
+                Objects.equals(number, entity.number) &&
+                Objects.equals(name, entity.name) &&
+                Objects.equals(specs, entity.specs) &&
+                Objects.equals(width, entity.width) &&
+                Objects.equals(color, entity.color) &&
+                Objects.equals(labelId, entity.labelId) &&
+                Objects.equals(labelName, entity.labelName) &&
+                Objects.equals(requirement, entity.requirement) &&
+                Objects.equals(plannedQuantity, entity.plannedQuantity) &&
+                Objects.equals(perPackQuantity, entity.perPackQuantity) &&
+                Objects.equals(remark, entity.remark) &&
+                Objects.equals(deliveryDate, entity.deliveryDate) &&
+                Objects.equals(clientId, entity.clientId) &&
+                Objects.equals(clientName, entity.clientName) &&
+                Objects.equals(floor, entity.floor) &&
+                Objects.equals(createUserId, entity.createUserId) &&
+                Objects.equals(createUser, entity.createUser) &&
+                Objects.equals(createTime, entity.createTime) &&
+                Objects.equals(alertDay, entity.alertDay) &&
+                Objects.equals(lookboardThreshold, entity.lookboardThreshold) &&
+                Objects.equals(delFlag, entity.delFlag);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, orderNum, number, name, specs, width, color, labelId, labelName, requirement, plannedQuantity, perPackQuantity, remark, deliveryDate, clientId, clientName, floor, createUserId, createUser, createTime, delFlag);
+        return Objects.hash(id, orderNum, number, name, specs, width, color, labelId, labelName, requirement, plannedQuantity, perPackQuantity, remark, deliveryDate, clientId, clientName, floor, createUserId, createUser, createTime, alertDay, lookboardThreshold, delFlag);
     }
 }

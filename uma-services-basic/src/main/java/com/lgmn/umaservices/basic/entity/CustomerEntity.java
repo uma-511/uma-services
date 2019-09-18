@@ -1,9 +1,5 @@
 package com.lgmn.umaservices.basic.entity;
 
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.SelectBeforeUpdate;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -11,9 +7,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "customer", schema = "uma", catalog = "")
-@DynamicUpdate
-@DynamicInsert
-@SelectBeforeUpdate
 public class CustomerEntity implements Serializable {
     private int id;
     private String name;
@@ -24,12 +17,14 @@ public class CustomerEntity implements Serializable {
     private String createUserId;
     private String createUser;
     private Timestamp createTime;
-    private int delFlag;
     private String customerCode;
     private String contacts;
+    private Integer orderReminder;
+    private Integer hadReminded;
     private String logistics;
     private String logisticsPhone;
     private String logisticsAddress;
+    private Integer delFlag;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -52,7 +47,7 @@ public class CustomerEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "phone", nullable = true, length = 20)
+    @Column(name = "phone", nullable = true, length = 11)
     public String getPhone() {
         return phone;
     }
@@ -102,7 +97,7 @@ public class CustomerEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "create_user", nullable = true, length = 30)
+    @Column(name = "create_user", nullable = true, length = 20)
     public String getCreateUser() {
         return createUser;
     }
@@ -122,17 +117,7 @@ public class CustomerEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "del_flag", nullable = false)
-    public int getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(int delFlag) {
-        this.delFlag = delFlag;
-    }
-
-    @Basic
-    @Column(name = "customer_code", nullable = true, length = 50)
+    @Column(name = "customer_code", nullable = true, length = 20)
     public String getCustomerCode() {
         return customerCode;
     }
@@ -152,7 +137,27 @@ public class CustomerEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "logistics", nullable = true, length = 30)
+    @Column(name = "order_reminder", nullable = true)
+    public Integer getOrderReminder() {
+        return orderReminder;
+    }
+
+    public void setOrderReminder(Integer orderReminder) {
+        this.orderReminder = orderReminder;
+    }
+
+    @Basic
+    @Column(name = "had_reminded", nullable = true)
+    public Integer getHadReminded() {
+        return hadReminded;
+    }
+
+    public void setHadReminded(Integer hadReminded) {
+        this.hadReminded = hadReminded;
+    }
+
+    @Basic
+    @Column(name = "logistics", nullable = true, length = 50)
     public String getLogistics() {
         return logistics;
     }
@@ -181,13 +186,22 @@ public class CustomerEntity implements Serializable {
         this.logisticsAddress = logisticsAddress;
     }
 
+    @Basic
+    @Column(name = "del_flag", nullable = true)
+    public Integer getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(Integer delFlag) {
+        this.delFlag = delFlag;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CustomerEntity that = (CustomerEntity) o;
         return id == that.id &&
-                delFlag == that.delFlag &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(phone, that.phone) &&
                 Objects.equals(fax, that.fax) &&
@@ -198,13 +212,16 @@ public class CustomerEntity implements Serializable {
                 Objects.equals(createTime, that.createTime) &&
                 Objects.equals(customerCode, that.customerCode) &&
                 Objects.equals(contacts, that.contacts) &&
+                Objects.equals(orderReminder, that.orderReminder) &&
+                Objects.equals(hadReminded, that.hadReminded) &&
                 Objects.equals(logistics, that.logistics) &&
                 Objects.equals(logisticsPhone, that.logisticsPhone) &&
-                Objects.equals(logisticsAddress, that.logisticsAddress);
+                Objects.equals(logisticsAddress, that.logisticsAddress) &&
+                Objects.equals(delFlag, that.delFlag);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, phone, fax, address, remark, createUserId, createUser, createTime, delFlag, customerCode, contacts, logistics, logisticsPhone, logisticsAddress);
+        return Objects.hash(id, name, phone, fax, address, remark, createUserId, createUser, createTime, customerCode, contacts, orderReminder, hadReminded, logistics, logisticsPhone, logisticsAddress, delFlag);
     }
 }
