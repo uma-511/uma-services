@@ -29,7 +29,10 @@ public class UmaDeviceServiceImpl extends LgmnAbstractService<UmaDeviceEntity, U
     public UmaDeviceEntity findByIp(String ip) {
         UmaDeviceDto dto = new UmaDeviceDto();
         dto.setIp(ip);
-        dto.setGroupName("看板");
+        return getUmaDeviceEntity(dto);
+    }
+
+    private UmaDeviceEntity getUmaDeviceEntity(UmaDeviceDto dto) {
         UmaDeviceEntity umaDeviceEntity = null;
         try {
             List<UmaDeviceEntity> deviceEntities = umaDeviceRepository.getListByDto(dto);
@@ -40,5 +43,17 @@ public class UmaDeviceServiceImpl extends LgmnAbstractService<UmaDeviceEntity, U
             e.printStackTrace();
         }
         return umaDeviceEntity;
+    }
+
+    @Override
+    public UmaDeviceEntity findPrinterByTerminal(String ip) {
+        UmaDeviceDto dto = new UmaDeviceDto();
+        UmaDeviceEntity terminal = findByIp(ip);
+        int groupId = terminal.getGroupId();
+        int printerType = 4;
+        dto.setGroupId(groupId);
+        dto.setType(printerType);
+
+        return getUmaDeviceEntity(dto);
     }
 }

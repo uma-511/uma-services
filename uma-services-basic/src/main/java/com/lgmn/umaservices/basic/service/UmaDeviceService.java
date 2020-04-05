@@ -6,4 +6,6 @@ import com.lgmn.umaservices.basic.entity.UmaDeviceEntity;
 
 public interface UmaDeviceService extends LgmnService<UmaDeviceEntity, UmaDeviceDto, Integer> {
     UmaDeviceEntity findByIp(String ip);
+
+    UmaDeviceEntity findPrinterByTerminal(String ip);
 }

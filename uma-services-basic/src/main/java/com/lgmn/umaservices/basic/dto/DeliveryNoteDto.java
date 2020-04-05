@@ -19,11 +19,11 @@ public class DeliveryNoteDto extends LgmnDto {
     private Integer customerId;
 
     // 客户名称
-    @Condition
+    @Condition(except = ConditionExcept.CONTAIN, ignoreEmpty = true)
     private String customer;
 
     // 联系人
-    @Condition
+    @Condition(except = ConditionExcept.CONTAIN, ignoreEmpty = true)
     private String contact;
 
     // 地址
@@ -31,11 +31,11 @@ public class DeliveryNoteDto extends LgmnDto {
     private String address;
 
     // 联系电话
-    @Condition
+    @Condition(except = ConditionExcept.CONTAIN, ignoreEmpty = true)
     private String phone;
 
     // 送货单号
-    @Condition
+    @Condition(except = ConditionExcept.CONTAIN, ignoreEmpty = true)
     private String deliveryNum;
 
     // 司机

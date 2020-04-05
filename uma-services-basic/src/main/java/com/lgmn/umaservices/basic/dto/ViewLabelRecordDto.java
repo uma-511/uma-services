@@ -16,7 +16,7 @@ import lombok.Data;
 public class ViewLabelRecordDto extends LgmnDto {
     @Condition
     private Integer id;
-    @Condition(except = ConditionExcept.CONTAIN)
+    @Condition(except = ConditionExcept.CONTAIN, ignoreEmpty = true)
     private String labelNum;
     @Condition
     private Integer packId;
@@ -46,9 +46,9 @@ public class ViewLabelRecordDto extends LgmnDto {
 //        }
 //    }
 
-    @Condition(except = ConditionExcept.BETWEEN_AND ,field = "prod_time",isMin = true)
+    @Condition(except = ConditionExcept.BETWEEN_AND ,field = "prodTime",isMin = true)
     private Timestamp beforeProdTime;
-    @Condition(except = ConditionExcept.BETWEEN_AND ,field = "prod_time",isMax = true)
+    @Condition(except = ConditionExcept.BETWEEN_AND ,field = "prodTime",isMax = true)
     private Timestamp endProdTime;
     @Condition
     private Timestamp inTime;
@@ -80,7 +80,7 @@ public class ViewLabelRecordDto extends LgmnDto {
     private String machineNum;
     @Condition
     private String banci;
-    @Condition(except = ConditionExcept.CONTAIN)
+    @Condition(except = ConditionExcept.CONTAIN, ignoreEmpty = true)
     private String orderNo;
     @Condition
      private Integer clientId;

@@ -10,9 +10,9 @@ import lombok.Data;
 public class YjProductDto extends LgmnDto {
     @Condition
     private Integer id;
-    @Condition(except = ConditionExcept.CONTAIN)
+    @Condition(except = ConditionExcept.CONTAIN,ignoreEmpty = true)
     private String num;
-    @Condition
+    @Condition(except = ConditionExcept.CONTAIN,ignoreEmpty = true)
     private String name;
     @Condition
     private String specs;
