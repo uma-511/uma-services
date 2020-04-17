@@ -41,6 +41,9 @@ public class LabelRecordEntity implements Serializable {
     private String banci;
     private String specs;
     private String deliveryNum;
+    private String refundNum;
+    private Timestamp refundTime;
+    private String refundUser;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -292,6 +295,37 @@ public class LabelRecordEntity implements Serializable {
         this.deliveryNum = deliveryNum;
     }
 
+    @Basic
+    @Column(name = "refund_num", nullable = true, length = 20)
+    public String getRefundNum() {
+        return refundNum;
+    }
+
+    public void setRefundNum(String refundNum) {
+        this.refundNum = refundNum;
+    }
+
+    @Basic
+    @Column(name = "refund_time", nullable = true)
+    public Timestamp getRefundTime() {
+        return refundTime;
+    }
+
+    public void setRefundTime(Timestamp refundTime) {
+        this.refundTime = refundTime;
+    }
+
+    @Basic
+    @Column(name = "refund_user", nullable = true, length = 32)
+    public String getRefundUser() {
+        return refundUser;
+    }
+
+    public void setRefundUser(String refundUser) {
+        this.refundUser = refundUser;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -321,11 +355,14 @@ public class LabelRecordEntity implements Serializable {
                 Objects.equals(machineNum, entity.machineNum) &&
                 Objects.equals(banci, entity.banci)&&
                 Objects.equals(specs, entity.specs)&&
-                Objects.equals(deliveryNum, entity.deliveryNum);
+                Objects.equals(deliveryNum, entity.deliveryNum)&&
+                Objects.equals(refundNum, entity.refundNum)&&
+                Objects.equals(refundTime, entity.refundTime)&&
+                Objects.equals(refundUser, entity.refundUser);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, labelNum, packId, orderId, prodId, modelId, status, prodTime, inTime, outTime, invalidTime, labelType, netWeight, grossWeight, skinWeight, prodUser, inUser, outUser, invalidUser, recordType, quantity, machineNum, banci,specs,deliveryNum);
+        return Objects.hash(id, labelNum, packId, orderId, prodId, modelId, status, prodTime, inTime, outTime, invalidTime, labelType, netWeight, grossWeight, skinWeight, prodUser, inUser, outUser, invalidUser, recordType, quantity, machineNum, banci,specs,deliveryNum,refundNum,refundTime,refundUser);
     }
 }

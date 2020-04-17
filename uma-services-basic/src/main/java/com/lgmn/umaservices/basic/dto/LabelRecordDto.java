@@ -79,4 +79,6 @@ public class LabelRecordDto extends LgmnDto {
     private String banci;
     @Condition
     private String deliveryNum;
+    @Condition
+    private String refundNum;
 }
