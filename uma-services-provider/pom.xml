@@ -158,14 +158,14 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
-                <excludes>
-                    <!--<exclude>filters/*</exclude>-->
-                    <!--<exclude>filters/*</exclude>-->
-                    <!--<exclude>application-dev.yml</exclude>-->
-                    <!--<exclude>application-uat.yml</exclude>-->
-                    <!--<exclude>application-alpha.yml</exclude>-->
-                    <!--<exclude>application-prod.yml</exclude>-->
-                </excludes>
+<!--                <excludes>-->
+<!--                    <exclude>filters/*</exclude>-->
+<!--                    <exclude>filters/*</exclude>-->
+<!--                    <exclude>application-dev.yml</exclude>-->
+<!--                    <exclude>application-uat.yml</exclude>-->
+<!--                    <exclude>application-alpha.yml</exclude>-->
+<!--                    <exclude>application-prod.yml</exclude>-->
+<!--                </excludes>-->
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
