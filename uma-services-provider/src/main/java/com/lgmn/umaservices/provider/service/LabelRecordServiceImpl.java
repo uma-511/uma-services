@@ -1,6 +1,5 @@
 package com.lgmn.umaservices.provider.service;
 
-import java.util.Date;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.lgmn.umaservices.basic.dto.LabelRecordDto;
 import com.lgmn.umaservices.basic.entity.LabelRecordEntity;
@@ -22,5 +21,10 @@ public class LabelRecordServiceImpl extends LgmnAbstractService<LabelRecordEntit
 
     public LabelRecordServiceImpl(LabelRecordRepository repository) {
         super(repository);
+    }
+
+    @Override
+    public Integer countByLabelNum(String labelNum) {
+        return labelRecordRepository.countByLabelNum(labelNum);
     }
 }

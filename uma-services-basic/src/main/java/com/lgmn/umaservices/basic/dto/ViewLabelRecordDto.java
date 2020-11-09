@@ -80,6 +80,8 @@ public class ViewLabelRecordDto extends LgmnDto {
     private String machineNum;
     @Condition
     private String banci;
+    @Condition(ignoreEmpty = true)
+    private String deliveryNum;
     @Condition(except = ConditionExcept.CONTAIN, ignoreEmpty = true)
     private String orderNo;
     @Condition
@@ -88,15 +90,19 @@ public class ViewLabelRecordDto extends LgmnDto {
     private String requirement;
     @Condition
     private Timestamp deliveryDate;
+    @Condition(except = ConditionExcept.BETWEEN_AND ,field = "deliveryDate",isMin = true)
+    private Timestamp beforeDeliveryTime;
+    @Condition(except = ConditionExcept.BETWEEN_AND ,field = "deliveryDate",isMax = true)
+    private Timestamp endDeliveryTime;
     @Condition
     private Integer orderQuantity;
     @Condition
     private Integer floor;
     @Condition
     private Integer perPackQuantity;
-    @Condition
+    @Condition(except = ConditionExcept.CONTAIN, ignoreEmpty = true)
     private String productName;
-    @Condition
+    @Condition(except = ConditionExcept.CONTAIN, ignoreEmpty = true)
     private String modelName;
     @Condition
     private BigDecimal longs;
@@ -108,11 +114,11 @@ public class ViewLabelRecordDto extends LgmnDto {
     private String materialQuality;
     @Condition
     private String lines;
-    @Condition
+    @Condition(ignoreEmpty = true)
     private String specs;
     @Condition
     private String yard;
-    @Condition
+    @Condition(ignoreEmpty = true)
     private String color;
     @Condition
     private String inAccount;
@@ -122,7 +128,7 @@ public class ViewLabelRecordDto extends LgmnDto {
     private String invalidAccount;
     @Condition
     private String prodAccount;
-    @Condition
+    @Condition(except = ConditionExcept.CONTAIN, ignoreEmpty = true)
     private String customerName;
 
 }

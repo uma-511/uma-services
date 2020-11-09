@@ -6,6 +6,7 @@ import com.lgmn.common.enums.ConditionExcept;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 public class DeliveryNoteDto extends LgmnDto {
@@ -13,6 +14,9 @@ public class DeliveryNoteDto extends LgmnDto {
     // 
     @Condition
     private Integer id;
+
+    @Condition(field = "id", except = ConditionExcept.IN)
+    private List<Integer> ids;
 
     // 客户id
     @Condition

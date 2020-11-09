@@ -10,6 +10,7 @@ import java.util.Objects;
 @Table(name = "view_look_board", schema = "uma", catalog = "")
 public class ViewLookBoardEntity implements Serializable {
     private Integer id;
+    private String number;
     private String name;
     private String specs;
     private String width;
@@ -30,6 +31,16 @@ public class ViewLookBoardEntity implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Basic
+    @Column(name = "number", nullable = true, length = 20)
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     @Basic

@@ -32,8 +32,10 @@ public class ViewLabelRecordEntity implements Serializable {
     private Integer quantity;
     private String machineNum;
     private String banci;
+    private String deliveryNum;
     private String orderNo;
     private Integer clientId;
+    private String clientName;
     private String requirement;
     private Timestamp deliveryDate;
     private Integer orderQuantity;
@@ -287,6 +289,16 @@ public class ViewLabelRecordEntity implements Serializable {
     }
 
     @Basic
+    @Column(name = "delivery_num")
+    public String getDeliveryNum() {
+        return deliveryNum;
+    }
+
+    public void setDeliveryNum(String deliveryNum) {
+        this.deliveryNum = deliveryNum;
+    }
+
+    @Basic
     @Column(name = "order_no", nullable = true, length = 20)
     public String getOrderNo() {
         return orderNo;
@@ -304,6 +316,16 @@ public class ViewLabelRecordEntity implements Serializable {
 
     public void setClientId(Integer clientId) {
         this.clientId = clientId;
+    }
+
+    @Basic
+    @Column(name = "client_name")
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 
     @Basic
@@ -534,8 +556,10 @@ public class ViewLabelRecordEntity implements Serializable {
                 Objects.equals(quantity, that.quantity) &&
                 Objects.equals(machineNum, that.machineNum) &&
                 Objects.equals(banci, that.banci) &&
+                Objects.equals(deliveryNum, that.deliveryNum) &&
                 Objects.equals(orderNo, that.orderNo) &&
                 Objects.equals(clientId, that.clientId) &&
+                Objects.equals(clientName, that.clientName) &&
                 Objects.equals(requirement, that.requirement) &&
                 Objects.equals(deliveryDate, that.deliveryDate) &&
                 Objects.equals(orderQuantity, that.orderQuantity) &&
@@ -560,6 +584,6 @@ public class ViewLabelRecordEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, labelNum, packId, orderId, prodId, modelId, status, prodTime, inTime, outTime, invalidTime, labelType, netWeight, grossWeight, skinWeight, prodUser, inUser, outUser, invalidUser, recordType, quantity, machineNum, banci, orderNo, clientId, requirement, deliveryDate, orderQuantity, floor, perPackQuantity, productName, modelName, longs, weight, width, materialQuality, lines, specs, yard, color, inAccount, outAccount, invalidAccount, prodAccount, customerName);
+        return Objects.hash(id, labelNum, packId, orderId, prodId, modelId, status, prodTime, inTime, outTime, invalidTime, labelType, netWeight, grossWeight, skinWeight, prodUser, inUser, outUser, invalidUser, recordType, quantity, machineNum, banci, deliveryNum, orderNo, clientId, clientName, requirement, deliveryDate, orderQuantity, floor, perPackQuantity, productName, modelName, longs, weight, width, materialQuality, lines, specs, yard, color, inAccount, outAccount, invalidAccount, prodAccount, customerName);
     }
 }

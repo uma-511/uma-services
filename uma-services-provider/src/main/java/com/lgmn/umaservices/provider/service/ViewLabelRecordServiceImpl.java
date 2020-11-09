@@ -12,7 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
         version = "${demo.service.version}",
         application = "${dubbo.application.id}",
         protocol = "${dubbo.protocol.id}",
-        registry = "${dubbo.registry.id}"
+        registry = "${dubbo.registry.id}",
+        timeout = 3000
 )
 public class ViewLabelRecordServiceImpl extends LgmnAbstractService<ViewLabelRecordEntity, ViewLabelRecordDto, Integer, ViewLabelRecordRepository> implements ViewLabelRecordService {
 

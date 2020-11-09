@@ -2,6 +2,7 @@ package com.lgmn.umaservices.basic.dto;
 
 import com.lgmn.common.annotation.Condition;
 import com.lgmn.common.domain.LgmnDto;
+import com.lgmn.common.enums.ConditionExcept;
 import lombok.Data;
 
 @Data
@@ -12,22 +13,22 @@ public class DeliveryListDto extends LgmnDto {
     private Integer deliveryId;
     	@Condition
     private Integer clientId;
-    	@Condition
+    	@Condition(except = ConditionExcept.CONTAIN,ignoreEmpty = true)
     private String clientName;
         //编号
-    	@Condition
+    	@Condition(except = ConditionExcept.CONTAIN,ignoreEmpty = true)
     private String number;
         //名称
-    	@Condition
+        @Condition(except = ConditionExcept.CONTAIN,ignoreEmpty = true)
     private String name;
         //规格
-    	@Condition
+        @Condition(except = ConditionExcept.CONTAIN,ignoreEmpty = true)
     private String specs;
         //宽度
-    	@Condition
+        @Condition(except = ConditionExcept.CONTAIN,ignoreEmpty = true)
     private String width;
         //颜色
-    	@Condition
+        @Condition(except = ConditionExcept.CONTAIN,ignoreEmpty = true)
     private String color;
         //工艺要求
     	@Condition
